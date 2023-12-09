@@ -80,7 +80,27 @@ export const dispatch = async (context: any)=>{
             }
             else {
                 const [ matched, indications, error] = await checkCollectionExists(messageBody);
+                if (matched) {
+                    await context.reply(`Fetching tokens for ${indications}`);
+                    const data = await GetTokenHoldersByTokenAddress(error);
 
+                    await sendTokenInfo(context, data);
+                    await context.reply(`Going to sleep now. Send me a message to wake me up!`);
+                    fsm.dispatch (Events.backToTop);
+                } else {
+                    if (error) {
+                        await context.reply(`Sorry, something went wrong. Please try again`);
+                        return fsm.dispatch (Events.backToTop);
+                    }
+                    if (indications) {
+                        await context.reply(`Sorry, I couldn't find any collection similar to ${messageBody}. Did you mean any of ${indications}? Please try again`);
+                        return fsm.dispatch (Events.retry);
+                    }
+                    else {
+                        await context.reply(`Sorry, I couldn't find any collection similar to ${messageBody}. Please try again`);
+                        return fsm.dispatch (Events.retry);
+                    }
+                }
             }
 
         

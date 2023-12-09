@@ -33,7 +33,8 @@ export async function fetchMentionOptions(
 
         return [data, null]
     }catch(err:any){
-        return [null, error?.message || 'Something went wrong'];
+        return [null, err?.message || 'Something went wrong'];
+        //Keep eye on this line
 
     }
     }

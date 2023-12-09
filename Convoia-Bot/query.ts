@@ -33,7 +33,18 @@ export async function fetchMentionOptions(
     }
     }
 
-
+export const MentionsQuery = `
+    query SearchAIMentions($input: SearchAIMentionsInput!) {
+      SearchAIMentions(input: $input) {
+        type
+        name
+        address
+        eventId
+        blockchain
+        thumbnailURL
+      }
+    }
+  `;
 
 
 export const GetTokenHoldersByTokenAddress = async (tokenAddress: string) =>  {

@@ -67,6 +67,18 @@ export const checkCollectionExists = async (collectionName : string) => {
     if (error) {
       return [false, null, error];
     }
+    let result = data?.SearchAIMentions;
+    let resultNames = result?.map ((x : any) => x.name.toLowerCase());
+		if (result && result.length > 0) {
+            let index = resultNames?.indexOf(collectionName.toLowerCase());
+			if (index != -1) {
+				return [true, result[index].name, result[index].address];
+			} else {
+				return [false, result.map ((x : any) => `"${x.name}"`).join(", "), null];
+			}
+		} else {
+			return [false, null, null];
+		}
 }
 
 export const GetPOAPEventExists = gql`

@@ -7,7 +7,7 @@ import { sendImage, sendTokenInfo } from "./sendNFTData.js";
 //sendNFTData.js file needed 
 
 enum States { waitingForUser = 0, waitingFirstInput, waitingForEventName};
-enum Events { userLogin = 100, wrongInput, sendNFT, sendPOAP , backToTop};
+enum Events { userLogin = 100, wrongInput, sendNFT, sendPOAP , backToTop, proposeGroupChat};
 
 
 const transitions = [
@@ -56,7 +56,20 @@ export const dispatch = async (context: any)=>{
             }
             
             const eventExist = await checkPoapEventExistence(messageBody);
+            if (eventExist) {
+                await context.reply(`Fetching data for event ${messageBody}`);
+                const data = await getPoapEventInfo(messageBody);
 
+                const poapEvent = data.PoapEvents.PoapEvent[0];
+                // await context.reply(`Found ${JSON.stringify(data)}`);
+                await sendImage(context, poapEvent.contentValue.image.original);
+                await context.reply(`${poapEvent.eventName} was a great event \n \
+                it took place in ${poapEvent.city},${poapEvent.country} \n
+                    from ${poapEvent.startDate} to ${poapEvent.endDate} \n`);
+                await context.reply(`I found ${poapEvent.poaps.length} attendees. \n
+                Would you like to start a group chat with them ?`)
+                return fsm.dispatch (Events.proposeGroupChat);
+            }
         
         }
 

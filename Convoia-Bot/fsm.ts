@@ -6,8 +6,8 @@ import { GetPOAPEvent, GetTokenHoldersByTokenAddress, checkCollectionExists, che
 import { sendImage, sendTokenInfo } from "./sendNFTData.js";
 //sendNFTData.js file needed 
 
-enum States { waitingForUser = 0, waitingFirstInput, waitingForEventName ,waitingForCollectionName,waitingForGroupChatConfirmation,};
-enum Events { userLogin = 100, wrongInput, sendNFT, sendPOAP , backToTop, proposeGroupChat , retry};
+enum States { waitingForUser = 0, waitingFirstInput, waitingForEventName ,waitingForCollectionName,waitingForGroupChatConfirmation,fetchingCollection};
+enum Events { userLogin = 100, wrongInput, sendNFT, sendPOAP , backToTop, proposeGroupChat , retry , sendCollectionName , };
 
 
 const transitions = [
@@ -15,6 +15,16 @@ const transitions = [
 		t(States.waitingForUser,    Events.userLogin,        States.waitingFirstInput	),
         t(States.waitingFirstInput,   Events.wrongInput,  States.waitingFirstInput),
         t(States.waitingFirstInput,   Events.sendNFT,  States.waitingForCollectionName),
+        t(States.waitingFirstInput,   Events.sendPOAP,  States.waitingForEventName),
+		t(States.waitingFirstInput,	Events.backToTop,  States.waitingFirstInput),
+		t(States.waitingForEventName,   Events.retry,  States.waitingForEventName),
+		t(States.waitingForEventName,   Events.backToTop,  States.waitingForUser),
+		t(States.waitingForEventName,  Events.proposeGroupChat,  States.waitingForGroupChatConfirmation),
+		t(States.waitingForGroupChatConfirmation,   Events.retry,  States.waitingForGroupChatConfirmation),
+		t(States.waitingForGroupChatConfirmation,   Events.backToTop,  States.waitingForUser),
+		t(States.waitingForCollectionName,   Events.retry,  States.waitingForCollectionName),
+		t(States.waitingForCollectionName,   Events.sendCollectionName,  States.fetchingCollection),
+		t(States.waitingForCollectionName,	Events.backToTop,  States.waitingForUser),
 
 
 ];
@@ -103,14 +113,19 @@ export const dispatch = async (context: any)=>{
                 }
             }
         case States.waitingForGroupChatConfirmation:
-            if(){
-
+            if (messageBody.toUpperCase() == "YES" || messageBody.toUpperCase() == "Y") {
+                await context.reply(`Great! I will start a group chat with the attendees of this event`);
+                await context.reply(`group chat started at 0x00Fc7E2a7A4B2D5A9D7d70c5EbD1b40c2f3742d3. join them now!`)
+                await context.reply(`Going to sleep now, Send me a message to wake me up!`);
+                return fsm.dispatch (Events.backToTop);
             }
-            else if{
-
+            else if (messageBody.toUpperCase() == "NO" || messageBody.toUpperCase() == "N") {
+                await context.reply(`Ok, I will go to sleep now.`);
+                return fsm.dispatch (Events.backToTop);
             }
-            else{
-                
+            else {
+                await context.reply(`Sorry, I didn't understand that. Please type YES or NO`);
+                return fsm.dispatch (Events.retry);
             }
 
         

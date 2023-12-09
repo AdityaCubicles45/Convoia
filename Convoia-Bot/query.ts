@@ -1,5 +1,6 @@
 import { gql } from "graphql-request";
 import { request} from 'graphql-request'
+const axios = require('axios');
 
 // Query to get the holders of tokens in a collection
 export const GetTokenHolders = `gql`
@@ -9,6 +10,22 @@ export async function fetchMentionOptions(
     limit: number
     ): Promise<[null | any, null | string]> {
     try{
+        axios.post('https://bff-prod.airstack.xyz/graphql',{
+            method: 'POST',
+            body: JSON.stringify({
+              operationName: 'SearchAIMentions',
+              query: MentionsQuery,
+              variables: {
+                input: {
+                  searchTerm: query,
+                  limit
+                }
+              }
+            }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+        })
         
     }catch(err:any){
         return [null, error?.message || 'Something went wrong'];

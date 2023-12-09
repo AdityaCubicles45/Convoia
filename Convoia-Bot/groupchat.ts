@@ -21,4 +21,10 @@ run (async (context)=>{
 	const messageBody = context.message.content;
 	const senderName = await provider.lookupAddress(sender) || sender;
 	const withAddress = `${senderName} says : \n${messageBody}`
+    if(){
+
+    }
+    else{
+        
+    }
 })

@@ -23,6 +23,15 @@ export const GetTokenHoldersByTokenAddress = async (tokenAddress: string) =>  {
   
   }
 
+export const GetPOAPEventExists = gql`
+    query CheckPoapEventExistence ($eventName: String!)) {
+    PoapEvents(input: {filter: {eventName: {_eq: $eventName}}, blockchain: ALL}) {
+    PoapEvent {
+    id
+    }
+    }
+}`;
+
   
 
 export const checkPoapEventExistence = async (eventName : string) => {

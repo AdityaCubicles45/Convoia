@@ -25,3 +25,25 @@ async function create_a_client() {
 async function check_if_an_address_is_on_the_network() {
 
 }
+
+async function start_a_new_conversation() {
+
+
+}
+
+async function send_a_message() {
+
+}
+
+async function stream_messages_in_a_conversation() {
+
+}
+
+async function stream_all_messages() {
+
+}
+
+function printQrCode() {
+
+
+}

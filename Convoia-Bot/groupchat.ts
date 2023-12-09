@@ -15,3 +15,7 @@ client.registerCodec(new AttachmentCodec())
 client.registerCodec(new RemoteAttachmentCodec())
 
 const provider = getDefaultProvider('homestead');
+
+run (async (context)=>{
+
+})

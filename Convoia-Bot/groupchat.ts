@@ -9,3 +9,11 @@ let wallet: HDNodeWallet | null = null;
 let xmtp: Client;
 const WALLET_TO = "0x93e2fc3e99dfb1238eb9e0ef2580efc5809c7204";
 let conversation: any;
+
+async function initialize_the_wallet() {
+    // You'll want to replace this with a wallet from your application
+    wallet = Wallet.createRandom();
+    console.log(`Wallet address: ${wallet.address}`);
+    return wallet;
+  }
+  

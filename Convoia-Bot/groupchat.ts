@@ -17,5 +17,8 @@ client.registerCodec(new RemoteAttachmentCodec())
 const provider = getDefaultProvider('homestead');
 
 run (async (context)=>{
-
+    const sender = context.message.senderAddress;
+	const messageBody = context.message.content;
+	const senderName = await provider.lookupAddress(sender) || sender;
+	const withAddress = `${senderName} says : \n${messageBody}`
 })

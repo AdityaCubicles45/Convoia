@@ -6,7 +6,7 @@ import { GetPOAPEvent, GetTokenHoldersByTokenAddress, checkCollectionExists, che
 import { sendImage, sendTokenInfo } from "./sendNFTData.js";
 //sendNFTData.js file needed 
 
-enum States { waitingForUser = 0, waitingFirstInput, waitingForEventName};
+enum States { waitingForUser = 0, waitingFirstInput, waitingForEventName ,waitingForCollectionName,};
 enum Events { userLogin = 100, wrongInput, sendNFT, sendPOAP , backToTop, proposeGroupChat , retry};
 
 
@@ -14,6 +14,8 @@ const transitions = [
     /* fromState        event                 toState         callback */
 		t(States.waitingForUser,    Events.userLogin,        States.waitingFirstInput	),
         t(States.waitingFirstInput,   Events.wrongInput,  States.waitingFirstInput),
+        t(States.waitingFirstInput,   Events.sendNFT,  States.waitingForCollectionName),
+
 
 ];
 
@@ -72,6 +74,15 @@ export const dispatch = async (context: any)=>{
             }
             await context.reply(`Sorry, I couldn't find any event similar ${messageBody}. Please try again with the exact name`);
 			return fsm.dispatch (Events.retry);
+        case States.waitingForCollectionName:
+            if (messageBody == "") {
+                return fsm.dispatch(Events.backToTop);
+            }
+            else {
+                const [ matched, indications, error] = await checkCollectionExists(messageBody);
+
+            }
+
         
         }
 

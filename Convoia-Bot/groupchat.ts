@@ -21,10 +21,14 @@ run (async (context)=>{
 	const messageBody = context.message.content;
 	const senderName = await provider.lookupAddress(sender) || sender;
 	const withAddress = `${senderName} says : \n${messageBody}`
-    if(){
+    if (userlist.includes(sender)) {
+		const filterList = userlist.filter((user) => user != sender);
+		for (const user of filterList) {
+			const convo = await client.conversations.newConversation(user)
+			await convo.send(withAddress)
+		}
 
-    }
-    else{
-        
-    }
+	} else {
+		await context.reply(`Sorry, you are not authorized to use this bot`);
+	}
 })

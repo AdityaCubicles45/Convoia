@@ -6,7 +6,7 @@ import { GetPOAPEvent, GetTokenHoldersByTokenAddress, checkCollectionExists, che
 import { sendImage, sendTokenInfo } from "./sendNFTData.js";
 //sendNFTData.js file needed 
 
-enum States { waitingForUser = 0, waitingFirstInput, waitingForEventName ,waitingForCollectionName,};
+enum States { waitingForUser = 0, waitingFirstInput, waitingForEventName ,waitingForCollectionName,waitingForGroupChatConfirmation,};
 enum Events { userLogin = 100, wrongInput, sendNFT, sendPOAP , backToTop, proposeGroupChat , retry};
 
 
@@ -101,6 +101,16 @@ export const dispatch = async (context: any)=>{
                         return fsm.dispatch (Events.retry);
                     }
                 }
+            }
+        case States.waitingForGroupChatConfirmation:
+            if(){
+
+            }
+            else if{
+
+            }
+            else{
+                
             }
 
         

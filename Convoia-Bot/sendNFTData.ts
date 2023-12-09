@@ -59,7 +59,7 @@ export const sendImage = async (context : HandlerContext, imageUrl : string) => 
           await convo.send(remoteAttachment, { contentType: ContentTypeRemoteAttachment })
           } catch (e) { console.error (e)}
 
-            
+        }      
         
 
 

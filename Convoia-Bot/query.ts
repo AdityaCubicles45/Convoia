@@ -4,12 +4,17 @@ import { request} from 'graphql-request'
 // Query to get the holders of tokens in a collection
 export const GetTokenHolders = `gql`
 
+export async function fetchMentionOptions(
+    query: string,
+    limit: number
+    ): Promise<[null | any, null | string]> {
+    try{
+        
+    }catch(err:any){
+        return [null, error?.message || 'Something went wrong'];
 
-
-
-
-
-
+    }
+    }
 
 
 
@@ -24,7 +29,10 @@ export const GetTokenHoldersByTokenAddress = async (tokenAddress: string) =>  {
   }
 
 export const checkCollectionExists = async (collectionName : string) => {
-        
+    let [data, error] = await fetchMentionOptions (collectionName, 10);
+    if (error) {
+      return [false, null, error];
+    }
 }
 
 export const GetPOAPEventExists = gql`

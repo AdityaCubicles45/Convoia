@@ -31,6 +31,9 @@ const transitions = [
 
 
 
+const onWrongCollectionNameInput = (context : any) => async () => {
+    await context.reply(`Sorry, I didn't understand that. Please type the name of the collection you are looking for`);
+}
 
 const fsm = new StateMachine<States,Events>(
     States.waitingForUser,   // initial state

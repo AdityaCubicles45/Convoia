@@ -9,7 +9,21 @@ import 'dotenv/config'
 
 export const sendImage = async (context : HandlerContext, imageUrl : string) => {
         try{
+            const convo = await client.conversations.newConversation(context.message.senderAddress)
 
+            // replace imageUrl with the url of your image
+                const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+                console.log('response', response)
+
+            // Get the image buffer
+                const imageBuffer = Buffer.from(response.data, 'binary');
+                const imageName = imageUrl.split("/").pop() || "";
+                const imageExt = imageName.split('.').pop() || "*/*";
+            const attachment = {
+            filename: imageName,
+            mimeType: imageExt,
+            data : imageBuffer,
+    }
 		} catch (e:any) { console.error (e)}
             
         

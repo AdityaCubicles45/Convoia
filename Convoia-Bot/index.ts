@@ -45,7 +45,11 @@ async function start_a_new_conversation() {
 }
 
 async function send_a_message() {
-
+  if (conversation) {
+    const message = await conversation.send("gm");
+    console.log(`Message sent: "${message.content}"`);
+    return message;
+  }
 }
 
 async function stream_messages_in_a_conversation() {

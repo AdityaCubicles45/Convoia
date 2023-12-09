@@ -52,8 +52,14 @@ async function send_a_message() {
   }
 }
 
-async function stream_messages_in_a_conversation() {
 
+async function stream_messages_in_a_conversation() {
+  if (conversation) {
+    console.log(`Streaming messages in conversation with ${conversation.peerAddress}`)
+    for await (const message of await conversation.streamMessages()) {
+      console.log(`New message from ${message.senderAddress}: ${message.content}`);
+    }
+  }
 }
 
 async function stream_all_messages() {

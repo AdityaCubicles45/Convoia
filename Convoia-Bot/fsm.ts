@@ -127,6 +127,8 @@ export const dispatch = async (context: any)=>{
                 await context.reply(`Sorry, I didn't understand that. Please type YES or NO`);
                 return fsm.dispatch (Events.retry);
             }
+        case States.fetchingCollection:
+            return ({})
 
         
         }

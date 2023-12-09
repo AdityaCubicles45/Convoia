@@ -29,7 +29,12 @@ async function create_a_client() {
 
 
 async function check_if_an_address_is_on_the_network() {
-
+//Message this XMTP message bot to get an immediate automated reply:
+  //gm.xmtp.eth (0x937C0d4a6294cdfa575de17382c7076b579DC176) env:production
+  if (xmtp) {
+    const isOnDevNetwork = await xmtp.canMessage(WALLET_TO);
+    console.log(`Can message: ${isOnDevNetwork}`);
+  }
 }
 
 async function start_a_new_conversation() {

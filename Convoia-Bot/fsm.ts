@@ -7,7 +7,7 @@ import { sendImage, sendTokenInfo } from "./sendNFTData.js";
 //sendNFTData.js file needed 
 
 enum States { waitingForUser = 0, waitingFirstInput, waitingForEventName};
-enum Events { userLogin = 100, wrongInput, sendNFT, sendPOAP , backToTop, proposeGroupChat};
+enum Events { userLogin = 100, wrongInput, sendNFT, sendPOAP , backToTop, proposeGroupChat , retry};
 
 
 const transitions = [
@@ -70,6 +70,8 @@ export const dispatch = async (context: any)=>{
                 Would you like to start a group chat with them ?`)
                 return fsm.dispatch (Events.proposeGroupChat);
             }
+            await context.reply(`Sorry, I couldn't find any event similar ${messageBody}. Please try again with the exact name`);
+			return fsm.dispatch (Events.retry);
         
         }
 

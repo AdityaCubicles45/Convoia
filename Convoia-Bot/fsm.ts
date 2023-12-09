@@ -6,12 +6,13 @@ import { GetPOAPEvent, GetTokenHoldersByTokenAddress, checkCollectionExists, che
 import { sendImage, sendTokenInfo } from "./sendNFTData.js";
 //sendNFTData.js file needed 
 
+enum States { waitingForUser = 0};
+enum Events { userLogin = 100};
 
-enum States{waitingForUser=0}
-enum Events{};
 
 const transitions = [
-        
+    /* fromState        event                 toState         callback */
+		t(States.waitingForUser,    Events.userLogin,        States.waitingFirstInput	),
 ];
 
 
@@ -27,7 +28,13 @@ export const dispatch = async (context: any)=>{
     const state = fsm.getState();
     //state will come from enum
     console.log("state", state)
-
+    switch(state){
+        case States.waitingForUser:
+            console.log("waitingForUser")
+            await context.reply(WelcomeMessage);
+            return fsm.dispatch(Events.userLogin);
+            
+        }
 
 
 }

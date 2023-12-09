@@ -42,6 +42,8 @@ const onWrongCollectionNameInput = (context : any) => async () => {
 		}
 }
 
+
+
 const fsm = new StateMachine<States,Events>(
     States.waitingForUser,   // initial state
     transitions ,     // array of transitions

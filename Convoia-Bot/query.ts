@@ -100,3 +100,6 @@ export const checkPoapEventExistence = async (eventName : string) => {
   
 };
   
+export const getPoapEventInfo = async (eventName : string) => {
+
+}

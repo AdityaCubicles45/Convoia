@@ -13,3 +13,5 @@ const wallet = new Wallet(process.env.KEY);
 const client = await Client.create(wallet, { env: 'production' })
 client.registerCodec(new AttachmentCodec())
 client.registerCodec(new RemoteAttachmentCodec())
+
+const provider = getDefaultProvider('homestead');

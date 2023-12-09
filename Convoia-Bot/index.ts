@@ -63,10 +63,11 @@ async function stream_messages_in_a_conversation() {
 }
 
 async function stream_all_messages() {
-
+  
 }
 
 function printQrCode() {
+  qrcode.generate(`https://go.cb-w.com/messaging?address=${wallet?.address}`)
 
 
 }

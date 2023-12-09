@@ -6,13 +6,15 @@ import { GetPOAPEvent, GetTokenHoldersByTokenAddress, checkCollectionExists, che
 import { sendImage, sendTokenInfo } from "./sendNFTData.js";
 //sendNFTData.js file needed 
 
-enum States { waitingForUser = 0};
-enum Events { userLogin = 100};
+enum States { waitingForUser = 0, waitingFirstInput};
+enum Events { userLogin = 100, wrongInput, sendNFT, sendPOAP};
 
 
 const transitions = [
     /* fromState        event                 toState         callback */
 		t(States.waitingForUser,    Events.userLogin,        States.waitingFirstInput	),
+        t(States.waitingFirstInput,   Events.wrongInput,  States.waitingFirstInput),
+
 ];
 
 
@@ -33,8 +35,19 @@ export const dispatch = async (context: any)=>{
             console.log("waitingForUser")
             await context.reply(WelcomeMessage);
             return fsm.dispatch(Events.userLogin);
-            
-        }
+        case States.waitingFirstInput:
+            if (messageBody.toUpperCase() == "NFT") {
+                await context.reply(AskForCollection)
+                return fsm.dispatch(Events.sendNFT);
+                }
+            else if (messageBody.toUpperCase() == "EVENT") {
+                await context.reply(AskForEvent);
+                return fsm.dispatch(Events.sendPOAP);
+            }
+            else {
+                await context.reply(`Sorry, I didn't understand that. Please type NFT`);
+                return fsm.dispatch(Events.wrongInput);
+            }        }
 
 
 }

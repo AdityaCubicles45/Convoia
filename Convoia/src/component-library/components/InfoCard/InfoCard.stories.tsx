@@ -1,35 +1,58 @@
-import type React from "react";
+import type { ComponentStory, ComponentMeta } from "@storybook/react";
+import { InfoCard } from "./InfoCard";
+import { InfoCardIcon } from "./iconMapping";
 
-interface ImageProps {
-    
-  src: string;
+export default {
+  title: "InfoCard",
+  component: InfoCard,
+  argTypes: {
+    variant: { control: false },
+    avatar: { control: false },
+    header: { control: "text", defaultValue: "Placeholder header" },
+    subtext: { control: "text", defaultValue: "Placeholder subtext" },
+    onClick: { control: false },
+    leftIcon: {
+      options: [
+        InfoCardIcon.NEW_MESSAGE,
+        InfoCardIcon.DOCUMENTATION,
+        InfoCardIcon.GALLERY,
+      ],
+      control: { type: "radio" },
+      defaultValue: InfoCardIcon.NEW_MESSAGE,
+    },
+  },
+} as ComponentMeta<typeof InfoCard>;
 
-  header?: string;
-
-  subtext?: string;
-
-  eyebrowText?: string;
-
-  cta?: React.ReactNode;
-
-  alt?: string;
-}
-
-export const Image = ({
-  src,
-  header,
-  subtext,
-  eyebrowText,
-  cta,
-  alt,
-}: ImageProps) => (
-  <div className="relative w-fit text-white">
-    <img src={src} alt={alt} className="rounded-lg" />
-    <div className="absolute top-0 left-0 p-8 w-6/12">
-      <p className="text-xs font-bold">{eyebrowText?.toUpperCase()}</p>
-      <h3 className="text-3xl font-bold">{header}</h3>
-      <p className="text-s mb-2">{subtext}</p>
-      <span>{cta}</span>
-    </div>
-  </div>
+const Template: ComponentStory<typeof InfoCard> = (args) => (
+  <InfoCard {...args} />
 );
+
+export const InfoCardNoArrow = Template.bind({});
+InfoCardNoArrow.args = {
+  leftIcon: InfoCardIcon.NEW_MESSAGE,
+  header: "Send a new message",
+  subtext:
+    "Find an existing contact or message someone using their wallet address, ENS, or UNS address",
+  onClick: undefined,
+};
+
+export const InfoCardWithArrow = Template.bind({});
+InfoCardWithArrow.args = {
+  leftIcon: InfoCardIcon.NEW_MESSAGE,
+  header: "Send a new message",
+  subtext:
+    "Find an existing contact or message someone using their wallet address, ENS, or UNS address",
+  onClick: () => {},
+};
+
+export const InfoCardNoArrowLoading = Template.bind({});
+InfoCardNoArrowLoading.args = {
+  isLoading: true,
+  onClick: undefined,
+};
+
+export const InfoCardWithArrowLoading = Template.bind({});
+InfoCardWithArrowLoading.args = {
+  isLoading: true,
+  onClick: () => {},
+};

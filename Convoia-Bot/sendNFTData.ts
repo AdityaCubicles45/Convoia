@@ -7,6 +7,13 @@ import axios from 'axios'
 import HandlerContext from "@xmtp/bot-starter/dist/HandlerContext.js";
 import 'dotenv/config'
 
+
+const wallet = new Wallet(process.env.KEY || "");
+
+const client = await Client.create(wallet, { env: 'production' })
+client.registerCodec(new AttachmentCodec())
+client.registerCodec(new RemoteAttachmentCodec())
+
 export const sendImage = async (context : HandlerContext, imageUrl : string) => {
         try{
             const convo = await client.conversations.newConversation(context.message.senderAddress)

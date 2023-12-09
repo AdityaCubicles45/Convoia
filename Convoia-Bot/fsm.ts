@@ -18,6 +18,8 @@ const transitions = [
 ];
 
 
+
+
 const fsm = new StateMachine<States,Events>(
     States.waitingForUser,   // initial state
     transitions ,     // array of transitions
@@ -52,6 +54,7 @@ export const dispatch = async (context: any)=>{
             if (messageBody == "") {
                 return fsm.dispatch(Events.backToTop);
             }
+            
             const eventExist = await checkPoapEventExistence(messageBody);
 
         

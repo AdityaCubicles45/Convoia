@@ -38,8 +38,10 @@ async function check_if_an_address_is_on_the_network() {
 }
 
 async function start_a_new_conversation() {
-
-
+  if (xmtp) {
+    conversation = await xmtp.conversations.newConversation(WALLET_TO);
+    console.log(`Conversation created with ${conversation.peerAddress}`);
+  }
 }
 
 async function send_a_message() {

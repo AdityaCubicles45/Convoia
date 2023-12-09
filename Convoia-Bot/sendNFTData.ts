@@ -30,7 +30,19 @@ export const sendImage = async (context : HandlerContext, imageUrl : string) => 
             filename: imageName,
             mimeType: imageExt,
             data : imageBuffer,
+
     }
+    const encryptedEncoded = await RemoteAttachmentCodec.encodeEncrypted(attachment, new AttachmentCodec())
+
+    // upload to web3 storage
+
+    // get back the url
+    const upload = new Upload("uploadIdOfYourChoice", encryptedEncoded.payload);
+
+    const web3Storage = new Web3Storage({
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGYzYzE3NzQ4NkUyMTgzNDQ5RUUwQzFmZDUxOTRhRUFFMGJFMEEyOTciLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTAwMzU5ODUxNjQsIm5hbWUiOiJFVEggR2xvYmFsIn0.ZAhBjsFV06oP5g-wWhl_sg8A_6VNs4_MJmMfc1rrxYo",
+    });
+
 		} catch (e:any) { console.error (e)}
             
         

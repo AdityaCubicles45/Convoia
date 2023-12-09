@@ -1,7 +1,5 @@
 
-# ChitChatChain Dapp
-
-**This is a fork of [XMTP Inbox web](https://github.com/xmtp-labs/xmtp-inbox-web) used to demonstrate [ChitChatChain Bot](https://github.com/ETHGlobalParis/xmtp-bot)**
+# Convoia
 
 The XMTP Inbox app is built with React and the [XMTP client SDK for JavaScript](https://github.com/xmtp/xmtp-js) (`xmtp-js`).
 

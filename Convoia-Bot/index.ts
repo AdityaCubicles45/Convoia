@@ -63,7 +63,12 @@ async function stream_messages_in_a_conversation() {
 }
 
 async function stream_all_messages() {
-  
+  printQrCode()
+  if (xmtp) {
+    for await (const message of await xmtp.conversations.streamAllMessages()) {
+      console.log(`New message from ${message.senderAddress}: ${message.content}`);
+    }
+  }
 }
 
 function printQrCode() {

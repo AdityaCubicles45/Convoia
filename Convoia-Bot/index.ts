@@ -18,7 +18,13 @@ async function initialize_the_wallet() {
   }
   
 async function create_a_client() {
+  if (!wallet) {
+    console.log("Wallet is not initialized");
+    return
+  }
 
+  xmtp = await Client.create(wallet, { env: "production" });
+  console.log("Client created", xmtp.address);
 }
 
 

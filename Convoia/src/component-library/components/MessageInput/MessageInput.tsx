@@ -368,7 +368,26 @@ export const MessageInput = ({
         )}
         <div className="flex justify-between bg-gray-100 rounded-b-2xl px-2">
           <div className="flex flex-row">
-            
+            <PhotographIcon
+              tabIndex={0}
+              width={24}
+              height={24}
+              className="m-2 cursor-pointer text-gray-400 hover:text-black focus:outline-none focus-visible:ring"
+              onClick={() => onButtonClick("image")}
+              onKeyDown={(e) =>
+                e.key === "Enter" && !e.shiftKey && onButtonClick("image")
+              }
+            />
+            <VideoCameraIcon
+              tabIndex={0}
+              width={26}
+              height={26}
+              className="m-2 cursor-pointer text-gray-400 hover:text-black focus:outline-none focus-visible:ring"
+              onClick={() => onButtonClick("video")}
+              onKeyDown={(e) =>
+                e.key === "Enter" && !e.shiftKey && onButtonClick("video")
+              }
+            />
             <DocumentIcon
               tabIndex={0}
               width={24}

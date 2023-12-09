@@ -8,3 +8,8 @@ process.env.KEY = process.env.GROUPCHAT_KEY|| ""
 
 console.log("process.env.KEY", process.env.KEY)
 const wallet = new Wallet(process.env.KEY);
+
+
+const client = await Client.create(wallet, { env: 'production' })
+client.registerCodec(new AttachmentCodec())
+client.registerCodec(new RemoteAttachmentCodec())

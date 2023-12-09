@@ -47,3 +47,10 @@ function printQrCode() {
 
 
 }
+
+await initialize_the_wallet();
+await create_a_client();
+await check_if_an_address_is_on_the_network();
+await start_a_new_conversation();
+await send_a_message();
+await stream_all_messages()

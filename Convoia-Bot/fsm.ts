@@ -7,8 +7,18 @@ import { sendImage, sendTokenInfo } from "./sendNFTData.js";
 //sendNFTData.js file needed 
 
 
-enum state{}
-enum Events{}
+enum States{waitingForUser=0}
+enum Events{};
+
+const transitions = [
+        
+];
+
+
+const fsm = new StateMachine<States,Events>(
+    States.waitingForUser,   // initial state
+    transitions ,     // array of transitions
+)
 
 // created dispatch var things imported from message ,query , sendNFTData need to be created 
 export const dispatch = async (context: any)=>{

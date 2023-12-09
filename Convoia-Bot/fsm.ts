@@ -33,6 +33,13 @@ const transitions = [
 
 const onWrongCollectionNameInput = (context : any) => async () => {
     await context.reply(`Sorry, I didn't understand that. Please type the name of the collection you are looking for`);
+    const messageBody = context.message.content;
+		if (messageBody == "") {
+			return fsm.dispatch (Events.backToTop);
+		}
+		else {
+			return fsm.dispatch(Events.sendCollectionName);
+		}
 }
 
 const fsm = new StateMachine<States,Events>(

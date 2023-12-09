@@ -248,8 +248,6 @@ query MyQuery ($eventName: String!) {
     }
   }
 }`;
-
-
   
 export const getPoapEventInfo = async (eventName : string) => {
     const data : any = await request('https://api.airstack.xyz/gql', GetPOAPEvent, { eventName, headers: {

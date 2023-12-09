@@ -42,11 +42,26 @@ export const sendImage = async (context : HandlerContext, imageUrl : string) => 
     const web3Storage = new Web3Storage({
       token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGYzYzE3NzQ4NkUyMTgzNDQ5RUUwQzFmZDUxOTRhRUFFMGJFMEEyOTciLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTAwMzU5ODUxNjQsIm5hbWUiOiJFVEggR2xvYmFsIn0.ZAhBjsFV06oP5g-wWhl_sg8A_6VNs4_MJmMfc1rrxYo",
     });
+    const cid = await web3Storage.put([upload]);
+    const url = `https://${cid}.ipfs.w3s.link/uploadIdOfYourChoice`;
 
-		} catch (e:any) { console.error (e)}
+    const remoteAttachment = {
+        url: url,
+        contentDigest: encryptedEncoded.digest,
+        salt: encryptedEncoded.salt,
+        nonce: encryptedEncoded.nonce,
+        secret: encryptedEncoded.secret,
+        scheme: "https://",
+        filename: attachment.filename,
+        contentLength: attachment.data.byteLength,
+      };
+  
+          await convo.send(remoteAttachment, { contentType: ContentTypeRemoteAttachment })
+          } catch (e) { console.error (e)}
+
             
         
-}
+
 
 export const sendTokenInfo = async (context: any, data: any) => {
 	//filter out tokens whose user has no XMTP

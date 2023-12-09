@@ -5,31 +5,17 @@ import { IconSkeletonLoader } from "../Loaders/SkeletonLoaders/IconSkeletonLoade
 import { ShortCopySkeletonLoader } from "../Loaders/SkeletonLoaders/ShortCopySkeletonLoader";
 
 interface AddressSettingsCardProps {
-  /**
-   * What is the header text?
-   */
+ 
   header: string;
-  /**
-   * What is the subtext?
-   */
+  
   subtext?: string;
-  /**
-   * What avatar is shown?
-   */
+
   avatar?: React.ReactNode;
-  /**
-   * Is the address associated with this account connected?
-   */
+
   isConnected?: boolean;
-  /**
-   * Are we waiting on anything loading?
-   */
+
   isLoading?: boolean;
 }
-/**
- *
- * Settings card that displays an address
- */
 export const AddressSettingsCard = ({
   header,
   subtext,

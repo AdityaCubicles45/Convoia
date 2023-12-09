@@ -24,3 +24,12 @@ export const GetTokenHoldersByTokenAddress = async (tokenAddress: string) =>  {
   }
 
   
+
+export const checkPoapEventExistence = async (eventName : string) => {
+    const data : any = await request('https://api.airstack.xyz/gql', GetPOAPEventExists, { eventName, headers: {
+      Authorization : process.env.AIRSTACK_TOKEN || "",
+    }})
+    return data.PoapEvents.PoapEvent != null;
+  
+};
+  

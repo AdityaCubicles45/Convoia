@@ -7,8 +7,12 @@ import axios from 'axios'
 import HandlerContext from "@xmtp/bot-starter/dist/HandlerContext.js";
 import 'dotenv/config'
 
-export const sendImage = ()=>{
+export const sendImage = async (context : HandlerContext, imageUrl : string) => {
+        try{
 
+		} catch (e:any) { console.error (e)}
+            
+        
 }
 
 export const sendTokenInfo = async (context: any, data: any) => {

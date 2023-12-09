@@ -17,3 +17,11 @@ async function initialize_the_wallet() {
     return wallet;
   }
   
+async function create_a_client() {
+
+}
+
+
+async function check_if_an_address_is_on_the_network() {
+
+}
